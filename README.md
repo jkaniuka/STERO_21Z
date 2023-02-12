@@ -8,3 +8,8 @@
 ###  [SysML](https://github.com/STERO-21Z/kaniuka-krasnodebski/blob/tiago/docs/projekt2_sysml.md)
 
 ![150435294-bc33f67f-0494-445d-b143-80bb06a3f1ad](https://user-images.githubusercontent.com/80155305/218339441-040887ec-2f86-4353-a7fb-a120791fbdba.gif)
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/80155305/218342459-a5f08393-29fd-4d72-844a-4ae9e626c24d.png" />
+</p>
+
