@@ -1,0 +1,21 @@
+1) listener.cpp 
+- subskrybuje /move_base_simple/goal
+- dodany w CMakeList.txt
+2) Dodanie tf2Buffer i TransformListener
+3) Global costmap z warstwą static
+4) plik .yaml dla globalnej mapy kosztów ( ustalony namespace (ns) w pliku .launch)
+5) Wizualizacja w Rviz mapy statycznej -> screen
+6) Warstwy static i obstacle w local costmap
+7) Test local cost map z dodaniem obiektów -> screen
+8) Dodanie inflation do obu map -> screen
+9) Inicjalizacja GlobalPlanner + basic plik .yaml z konfiguracją
+10) callback od odometrii
+11) Globalny planer działa poprawnie -> wizualizacja ścieżki w RViz -> screen
+12) local planner config w pliku .yaml (TrajectoryPlannerROS)
+13) lokalny planer działa
+14) recovery behaviour - on publikuje na temacie cmd_vel trzeba odpalać : rosrun stero_mobile_init listener cmd_vel:=key_vel
+15) parametry chyba są jakoś znośnie poustawiane 
+16) do odpalenia całego systemu wystarczy uruchomienia launch'a -> potem normalnie w Rviz zadajemy cel (nie trzeba osobno uruchamiać listenera i mapować) + recovery też działa w tej konfiguracji
+******************************
+Fajny artykuł z objaśnieniem parametrów map: https://arxiv.org/pdf/1706.09068.pdf
+******************************

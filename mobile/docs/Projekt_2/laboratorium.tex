@@ -1,0 +1,30 @@
+\chapter{Czêœæ laboratoryjna}
+
+
+\subsection{Budowa parterowego œwiata}  
+Pracê na laboratorium zaczêliœmy od budowy parterowego œwiata w symulatorze \texttt{Gazebo}. Zbudowaliœmy i zapisaliœmy dwa œwiaty: parterowy budynek oraz d³ugi korytarz bez drzwi. Model budynku bêdzie naszym œrodowiskiem testowym dla modu³u planowania implementowanego w czasie projektu. Drugi œwiat zostanie wykorzystany przy pracy z systemem lokalizacji \texttt{amcl} podczas laboratorium nr 3.
+
+\subsection{Parterowy budynek z przejœciami o ró¿nej szerokoœci}  
+Zbudowaliœmy budynek o prostym uk³adzie pomieszczeñ. Umieœciliœmy w nim przejœcia o ró¿nej szerokoœci - odpowiednio 100\%, 150\%, 200\% i 300\% szerokoœci robota. W czêœci projektowej bêdziemy sprawdzaæ, jak wartoœci parametrów map kosztów oraz planerów wp³ywaj¹ na zdolnoœæ robota do przejechania przed otwór danej szerokoœci.
+
+\subsection{D³ugi korytarz bez drzwi}  
+Utworzyliœmy korytarz o jednolitych œcianach, bez drzwi oraz okien o d³ugoœci 20 metrów.
+
+\subsection{Konfiguracja modu³u SLAM}  
+Korzystaliœmy z modu³u \texttt{SLAM} (\textit{Simultaneous Localization and Mapping}) wykorzystuj¹cego informacje z tematu \textit{/scan\_raw}. Pozwoli³o to na stworzenie dwuwymiarowej siatki zajêtoœci.
+
+\subsection{Budowa mapy}  
+Zbudowanie mapy sprowadza³o siê do uruchomienia wêz³a pozwalaj¹cego na sterowanie robotem za pomoc¹ klawiatury i na przejechaniu przez robota ca³ej powierzchni parterowego budynku.
+
+\subsection{Pomiar œrednicy robota} 
+Korzystaj¹cz z narzêdzia \textit{Measure} w \texttt{RViZ} zmierzyliœmy œrednicê bazy jezdnej robota, aby móc j¹ póŸniej uwzglêdniæ przy konfiguracji map kosztów.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.21]{plots/diameter}
+    \caption{Pomiar œrednicy bazy jezndej robota TiaGo.}
+\end{figure}
+
+
+
+

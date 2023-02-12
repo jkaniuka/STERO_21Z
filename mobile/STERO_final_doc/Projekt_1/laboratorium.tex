@@ -1,0 +1,56 @@
+\chapter{Czêœæ laboratoryjna}
+
+
+\subsection{Zapoznanie ze œrodowiskiem}  
+
+Pracê w laboratorium rozpoczêliœmy od odpowiedniego skonfigurowania stanowiska do pracy. Stworzyliœmy przestrzeñ robocz¹ i pod³¹czyliœmy siê do pakietów robota \emph{Tiago}. Nastêpnie przeszliœmy do folderu Ÿróde³ i pobraliœmy stosowne repozytorium.
+W pierwszej kolejnoœci uruchomiliœmy programy Gazebo oraz RViz w celu wizualizacji robota w pustym œwiecie (symulacji).
+
+
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.2]{Projekt_1/plots/rviz}
+    \caption{Widok z wizualizatora \emph{RViz}}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.2]{Projekt_1/plots/gazebo}
+    \caption{Widok z symulatora \emph{Gazebo}}
+\end{figure}
+
+\subsection{Sterowanie prêdkoœciowe}  
+W naszym przypadku sterowanie to polega na inicjalizacji ruchu w punkcie (0,0,0) [x,y,theta]. Kolejne sterowania wyznaczane s¹ na podstawie zrealizowanej (idealnie) poprzedniej akcji ruchu. Zak³adamy wiêc, ¿e znaj¹c prêdkoœæ i zadaj¹c konkretny czas ruchu, robot dojedzie do po¿¹danej pozycji. Testy mieliœmy wykonaæ dla trzech, ró¿nych prêdkoœci o nastêpuj¹cych wartoœciach podanych przez Prowadz¹cego:
+
+\begin{center}
+\begin{tabular}{||c c c||} 
+ \hline
+    & linear & angular \\ [0.5ex] 
+ \hline\hline
+ low & 0.04 m/s & 0.11 rad/s\\ 
+ \hline
+ medium & 0.096 m/s & 0.264 rad/s\\
+ \hline
+ high & 0.23 m/s & 0.6336 rad/s\\ [1ex] 
+ \hline
+ \cline
+
+\end{tabular}
+\end{center}
+
+
+(testy sprawdzaj¹ce poprawnoœæ dzia³ania programu wykonywaliœmy wzglêdem danych z tematu \texttt{/gazebo/model\_states/pose[1]/position})
+
+\subsection{Omówienie implementacji}  
+Parametrami w naszym programie s¹: d³ugoœæ boku kwadratu oraz prêdkoœæ liniowa i obrotowa. Prêdkoœæ zadana jest sta³a, wiêc przekszta³caj¹c równanie dla ruchu jednostajnego mo¿emy wyliczyæ czas. Zadajemy ruch liniowy przez wyznaczony okres czasu, a nastêpnie ruch obrotowy o k¹t 90 stopni. Zak³adamy (mo¿liwe, ¿e naiwnie), ¿e robot wykona³ powierzone mu zadanie tzn. przeby³ dystans w odpowiednim czasie.
+
+\subsection{Test kwadratu z wizualizacj¹ w Rviz}  
+Podczas zajêæ uda³o nam siê sprawdziæ poprawnoœæ dzia³ania zaimplementowanej struktury sterowania. Poni¿ej za³¹czamy obraz ze œcie¿k¹ wykonan¹ przez robota podczas sterowania prêdkoœciowego przy ma³ej prêdkoœci.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[scale=0.6]{Projekt_1/plots/lab_example}
+    \caption{Sterowanie prêdkoœciowe (prêdkoœæ \emph{ma³a})} 
+\end{figure}
+

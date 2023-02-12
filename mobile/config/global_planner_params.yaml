@@ -1,0 +1,4 @@
+visualize_potential: true # wizualizacja danych z chmury punktów
+use_grid_path: false # metoda spadku gradientu ( sposób układania ścieżki)
+use_dijkstra: true # algorytm A* albo algorytm Dijkstry
+#default_tolerance: 0.05 # koniec ścieżki zaplanowanej przez planner będzie nie dalej niż 5cm od rzeczywistego celu

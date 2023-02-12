@@ -1,0 +1,3 @@
+source /opt/ws_tiago/setup.bash
+
+source ~/mobile_ws/devel/setup.bash

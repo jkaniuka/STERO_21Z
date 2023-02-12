@@ -1,0 +1,15 @@
+\contentsline {chapter}{\numberline {1\relax .\enspace }Wst\k ep}{2}{}%
+\contentsline {chapter}{\numberline {2\relax .\enspace }Cz\k e\'s\'c laboratoryjna}{3}{}%
+\contentsline {subsection}{\numberline {2.0.1\relax .\enspace }Zapoznanie ze \'srodowiskiem}{3}{}%
+\contentsline {subsection}{\numberline {2.0.2\relax .\enspace }Sterowanie pr\k edko\'sciowe}{3}{}%
+\contentsline {subsection}{\numberline {2.0.3\relax .\enspace }Om\'owienie implementacji}{4}{}%
+\contentsline {subsection}{\numberline {2.0.4\relax .\enspace }Test kwadratu z wizualizacj\k a w Rviz}{4}{}%
+\contentsline {chapter}{\numberline {3\relax .\enspace }Cz\k e\'s\'c projektowa}{5}{}%
+\contentsline {subsection}{\numberline {3.0.1\relax .\enspace }Implementacja wzgl\k ednego sterowania pozycyjnego}{5}{}%
+\contentsline {subsection}{\numberline {3.0.2\relax .\enspace }Por\'ownanie dok\IeC {\l }adno\'sci osi\k agania pozycji z wykorzystaniem pozycji referencyjnej}{6}{}%
+\contentsline {subsection}{\numberline {3.0.3\relax .\enspace }Praca z rzeczywistym robotem}{9}{}%
+\contentsline {subsection}{\numberline {3.0.4\relax .\enspace }rosbag}{9}{}%
+\contentsline {subsection}{\numberline {3.0.5\relax .\enspace }rqtplot}{9}{}%
+\contentsline {subsection}{\numberline {3.0.6\relax .\enspace }Analiza danych z pliku \emph {.bag} }{10}{}%
+\contentsline {subsection}{\numberline {3.0.7\relax .\enspace }Struktura komunikacji}{15}{}%
+\contentsline {chapter}{\numberline {4\relax .\enspace }Podsumowanie}{16}{}%

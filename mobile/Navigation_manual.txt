@@ -1,0 +1,146 @@
+STERO - projekt 1
+
+Wątpliwości:
++ sprawdź proszę kwadrat dla sterowania prędkościowego (prędkość niska) - jak dla mnie jest zbyt krzywy
+- przejrzyj proszę sprawko (folder docs) -> w Latexie kompilujesz plik sprawozdanie, reszta to załączniki + grafiki i wykresy
++ jakbyś mógł w pliku analyze.py zerknąć na ten kąt co wysyłałem
+
+
+Do zrobienia:
++ tabela z błędami z testów z robotem (dla każdej prędkości błąd dla x,y,theta - skumulowany i średni) - w 95% gotowy kod analyze.py
++ wykresy(3) z błędem orientacji (ten, co Ci wysłałem)
++ Porównanie dokładności osiągania pozycji z wykorzystaniem pozycji referencyjnej z symulatora Gazebo (było w instrukcji, chyba nie ma sensu wstawiać 6 wykresów z symulacji, myślę, że jeden/dwa starczą)
++ porównanie prędkości zadanych i wykonanych (też myślę, że nie trzeba każdego wykresu wstawiać, bo to nudne)
+
+
+Co, gdzie, jak :
+- kody testowe przeniosłem do /other
+- w /dosc jest dokumentacja w LaTeX oraz grafiki
+- w /bag files są bagi + przekonwertowane bagi do .csv dla global i odom i plik z analizatorem do wykresów (analyze.py)
+
+
+*****************************************************************************************************************************************************
+*****************************************************************************************************************************************************
+
+STERO - projekt 2 (instrukcja)
+
+
+initializacja - nazwy są parametrami rosa
+
+planer_1:
+    param_1  = value
+    paramset:
+        param_2 = value
+
+planer_1/param_1
+planer_1/paramset/param_2
+
+
+initialize("dwa_planer", ...)
+
+ros::init(arg, arg, "my_node")
+
+my_node/dwa_planer/param_10
+
+
+
+rostopic echo / move_base_goal
+
+w układzie mapy
+
+
+
+1. Węzeł do subskrybowania: Ros subscriber(/move_base_simple/goal) name="my_move"
+
+modyfikacje cmakelist.txt:
+    uzupełnic find_package
+    add_executable(talker src/...)
+    target_link_libraries
+2. tf2::Buffer
+
+api->
+
+include costmap_2d_ros
+
+tf2_ros::Buffer tfBuffer
+tf2_ros::TransformListener
+3. Costmap2DROS(global_costmap, tfBuffer) - static
+
+4. Plik konfiguracyjny mapy kosztów
+gLobal_costmap.yaml -> wpisać do roslauncha
+
+uzupełnić z neta ten plik
+5. Test
+Uruchomić tiago, węzeł my_move, rviza
+Wizualizacja mapy kosztów:
+by topic-> pod nazwą mapy kosztów
+
+zacząc od statycznej
+
+6. Kolejna mapa kosztów
+Costmap2DROS - static + obstacle (local_costmap)
+
+7. Test(analogicznie jak pkt 5)
+
+dodanie obiektów, czy skaner zmiienia mapę
+
+8. Dodanie inflation do obu map kosztów
+
+
+Tworzenie tych obiektów w inicjalizacji węzła, w momencie przyjścia celu wywołanie planerów,
+
+9. globalny planer  + global_plan.yaml
+10. 
+Test global planer
+metoda makePlan(  )wywołanie w callback 
+
+subskrybowanie odom 
+
+Wizualizacja ścieżki (publikowane na topicu )
+
+11. Local Planner (DWA itp ) + local plan.yaml 
+
+
+initialize - inicjalizacja nodea
+setPlan -callback
+computeVelocityCommands w petli, zwraca true albo false, false jeżeli błąd lub brak możliwej trajektorii
+
+
+
+wiki do map kosztów, tutorials, konfiguracja warstw
+plugins
+
+
+
+
+STERO - ogólne lab 2
+
+rosed stero_mobile_init tiago_simple.launch
+export EDITOR=subl
+rosed stero_mobile_init tiago_simple.launch
+drugi plik launch -> zminić swiat
+roslaunch 
+
+
+
+Mierzenie średnicy
+source
+roslaunch stero_mobile_init tiago_simple.launch
+strzałka z prawej w rviz
+->Zero
+zoom
+->measure
+Wynik na dole
+
+Add -> by topic -> map
+
+source 
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd:kel_vel
+
+rosrun gmapping slam_gmapping scan:=scan_raw
+
+rosrun map_server map_saver -f budynek
+
+
+
+

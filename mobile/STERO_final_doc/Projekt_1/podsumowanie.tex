@@ -1,0 +1,13 @@
+\chapter{Podsumowanie}
+Testy przeprowadzone dla sterowania prêdkoœciowego wykaza³y zgodnoœæ prêdkoœci zadanej z prêdkoœci¹ wykonan¹. Mimo to ten rodzaj sterowania musi zak³adaæ ca³kowity brak oddzia³ywañ zewnêtrznych na robota. Najmniejszy poœlizg, czy te¿ nierówna powierzchnia, mog¹ spowodowaæ, ¿e robot bêdzie "przekonany", ¿e dojecha³ do celu - w rzeczywistoœci mo¿e byæ daleko od niego.\par
+Odometria jest bardziej skomplikowana od samego sterowania prêdkoœciowego. Korzystamy w niej z danych z enkoderów zamontowanych na wa³ach silników, które informuj¹ nas o dystansie przebytym przez robota oraz o k¹cie, o jaki wykona³ obrót. Nierównoœci terenu, œciany, poœlizgi, czy te¿ manualne podniesienie i postawienie robota w innym miejscu powoduj¹ zagubienie informacji o lokalizacji. Odometria robota bazuje na fizycznych wielkoœciach takich jak rozstaw i œrednica kó³, czy te¿ rozdzielczoœæ enkoderów. Drobne niedok³adnoœci w wartoœciach tych parametrów powoduj¹ akumulacjê b³êdów. Zaobserwowaliœmy to podczas testów z prawdziwym robotem.\par
+Na poni¿szej grafice widaæ œcie¿kê wykreœlon¹ przez robota. Po wykonaniu kilku, symulowanych przejazdów w ramach testu kwadratu widaæ ju¿ wyraŸnie, ¿e kolejne œcie¿ki nie pokrywaj¹ siê idealnie.
+
+
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[scale=0.4]{Projekt_1/plots/akumulacja_super}
+    \caption{Akumulacja b³êdów odometrii}
+\end{figure}
+

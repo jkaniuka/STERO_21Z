@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+  <include file="$(find manipulation)/launch/velma_system_p2.launch"/> 
+  <include file="$(find velma_ros_plugin)/launch/velma_planner.launch"/>  
+
+</launch>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="link_name_object" default="cabinet_door_fragile::right_handle"/>
+  <arg name="frame_id_object" default="right_handle"/>
+
+  <!-- <arg name="link_name_table" default="table_surface::link"/>
+  <arg name="frame_id_table" default="table_surface"/> -->
+
+
+  <include file="$(find rcprg_gazebo_utils)/launch/gazebo_publish_ros_tf_object.launch">   
+    <arg name="link_name" value="$(arg link_name_object)" />
+    <arg name="frame_id" value="$(arg frame_id_object)" />
+  </include>
+
+
+<!-- <include file="$(find rcprg_gazebo_utils)/launch/gazebo_publish_ros_tf_object.launch">   
+    <arg name="link_name" value="$(arg link_name_table)" />
+    <arg name="frame_id" value="$(arg frame_id_table)" />
+  </include> -->
+
+  <arg name="rviz_def_congig" default="$(find manipulation)/data/velma_proj_2.rviz"/>
+  <node type="rviz" name="rviz" pkg="rviz" args="arg -d $(arg rviz_def_congig)" />
+
+  <include file="$(find manipulation)/launch/octomap_offline_server_p2.launch"/>  
+
+</launch>

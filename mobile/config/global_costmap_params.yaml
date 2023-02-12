@@ -1,0 +1,16 @@
+plugins: 
+  - {name: static_map,       type: "costmap_2d::StaticLayer"} 
+  - {name: inflation_layer,  type: "costmap_2d::InflationLayer"}
+# nie dodajemy obstacle_layer, ponieważ skaner laserowy nie ma "globalnego" zasięgu - działa lokalnie, wokół robota
+
+publish_frequency: 1.0 # częstotliwość odświeżania WIDOKU mapy na ekranie
+static_map: true
+robot_radius: 0.26 # wyznaczony w RViz opcją Measure d = 52 cm
+always_send_full_costmap: true # podczas update odświeżamy całość mapy (nie tyko zmiany)
+#transform_tolerance: 0.4 # dopuszczalne opóźnienie dotarcia wiadomości o transformacji między układami współrzędnych,
+# jeśli wiadomość przyjdzie później, NavStack zatrzyma robota dla bezpieczeństwa
+
+inflation_layer:
+  inflation_radius: 0.5 # promień wokół przeszkody, która jest już "napompowana"
+  cost_scaling_factor: 5.0 # parametr funkcji kosztu zależnego od odległości od przeszkody
+  # funkcja kosztu maleje jak e^(-x), więc ZWIĘKSZANIE tego paramtru ZMNIEJSZA koszt

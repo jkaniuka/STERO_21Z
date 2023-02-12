@@ -1,0 +1,31 @@
+1.
+
+na podstawie rozkłądów przybliżonego połóżenia i pomiarów wyznaczamy lokallizacje
+filtr kalmana tylko dla układów liniowych - rozkład normalny przemnożony przez funkcje liniowe daje rozkład normalny, przez nielionowe już nie jest rozkładem normalnym, trzeba linearyzować(najlepiej lokalnie) - rozszerzony filtr kalmana.
+
+2. filtr cząsteczkowy - 
+
+tworzenie hipotez położenia, na podstawie pomiarów(np wysokość) wyznaczamy możliwe hipotezy
+rozkład poprawnych hipotez - tworzenie nowych na podsrawie otrzymanego rozkładu
+model + wejście -> przesuniecie punktów o przemieszczenie(z rozkładem), nowe hipotezy
+nowy pomiar, usuwanie nieprawdopodobnych hipotez
+
+
+AMCL -adaptive -> zmiana ilości cząsteczek
+
+
+<node pkg="amcl" type="amcl" name="amcl">
+	<remap from="scan" to="scan_raw"/>
+</node>
+
+particlecloud
+
+wykorzystać global_localization do rozproszenia cząsteczek
+
+teleop do ruchu
+
+wizualizacja -> map, odom, base_link
+
+oba światy
+
+wnioski

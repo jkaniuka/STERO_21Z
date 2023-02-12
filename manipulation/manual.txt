@@ -1,0 +1,115 @@
+Co, jak, kiedy?
+
+W każdym terminalu:
+    source ~/mobile_ws/devel/setup.bash
+
+#################### PROJEKT 2 #######################
+
+Instrukcja odpalenia:
+    roscore
+    roslaunch manipulation full_p2.launch
+    roslaunch manipulation rviz_and_objects_p2.launch
+    roslaunch rcprg_gazebo_utils gazebo_client.launch
+    rosrun manipulation project_2.py
+
+
+Lista zadań:
+    -> octomapa - zrobiona
+    -> kinematyka odwrotna? - już chyba jest uwzględniona w JIMP
+    -> otwieranie(wyznaczenie kilku pozycji do osiągnięcia 
+        tak chyba będzie łatwiej, niż angażowac drugą ręke do popychania - coś napewno nie zadziała)
+    -> dokumentacja
+
+    - Ogarnąłem już otwieranie w pracy "krokowej" że tak powiem - działa xD
+    - Dodałem funkcję, która wylicza promień szafki tzn. promień okręgu po którym porusza się uchwyt szafki
+    - Potem z tego wyznaczę równanie okręgu i kilka dyskretnych punktów
+    - W kolejnych pozycjach będzie się zmieniał oczywiście kąt, pod którym ciągniemy uchwyt
+
+    Polecam poniższy filmik, jako wzorzec:
+    https://vimeo.com/390454727?embedded=true&source=video_title&owner=28108530 
+
+    Kluczową sprawą teraz jest cofnięcie right_hand.tool_to_grip(), bo w cart_imp wygodniej jest jak ten układ jest w standardowej pozycji ;-)
+    
+
+
+
+#################### PROJEKT 1 #######################
+Potem(uruchomienie domyślne projektu):
+
+    roscore
+    roslaunch manipulation velma_system.launch
+    roslaunch velma_ros_plugin velma_planner.launch
+    rosrun rcprg_ros_utils run_rviz.sh
+    -> wybranie konfiguracji w rviz
+        -> domyślna dla projektu, proponuję plik: velma_proj_1.rviz
+        -> narazie nie wiem jak to dodać domyślnie
+        -> rviz ma czasem jakieś problemy, ja zmieniam frame na map, potem wracam do world i działa
+    roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:=object1::link frame_id:=object1
+    roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:=table1::link frame_id:=table1
+    -> w sumie to te dwie linijki wyżej można dodać to launcha, ale coś mi nie działo i zwątpiłem chwilowo
+    roslaunch manipulation octomap_offline_server.launch 
+    -> to już domyślnie odpala launcha w którym jest zdefiniowany plik
+    rosrun manipulation project_1.py 
+    -> to jest narazie plik w którym działam, potem można to wszytsko napisać w formie automatu stanów i klas
+
+Zrobiłem już octomapę, komendy:
+    -> 4 pierwsze z sekcji wyżej
+    roslaunch velma_common octomap_server.launch
+    rosrun manipulation test_custom_head.py
+    -> zapisana w pliku map.bt  rosrun octomap_server octomap_saver cabinet_map.bt
+    -> ogólnie to nie wiem czy ona się ładuje, ale czytanie z topiku dla planera działa
+
+Przed każdym powtórnym odpaleniem polecam:
+    rosrun velma_common reset_shm_comm.py
+
+Lista zadań:
+    -> TF ze stołu jest za nisko, powinien być na blacie - zrobione
+    -> dopisać polecenia do launchy - zrobione
+    -> automat stanów - zaproponowałem podział na kilka mniejszych etapów
+    -> dalsza implementacja ruchu - najlepiej jutro proponuję jakoś omówić pomysły na podejście do słoika (jakoś na Discordzie)
+
+Nowa instrukcja odpalenia:
+- roscore
+- roslaunch manipulation full.launch
+(wyświetli się informacja, że czeka na inicjalizację podsystemu - nie jest to szczególnie istotne)
+- roslaunch manipulation rviz_and_objects.launch
+(czekamy chwilę, pokaże się sam tułów robota(biały) a za chwilę cały robot i układy)
+- rosrun manipulation project_1.py
+
+TF stołu:
+- chciałem dodać po prostu nowego frame'a, ale nie było to możliwe bez nowego obiektu,
+- stół na który odstawiamy słoik ma wysokość 0,93m,
+- nałożyłem na niego cieniutki blat o wysokości 0,02m
+- teraz nie interesuje nas frame table1 ale "table_surface"
+- po odpaleniu z powyższą instrukcją pojawi się table_surface w dobrym miejscu na wysokości blatu w RViz
+- nie ma co zmieniać octomapy bo te voxele na mapie zajętości są dość spore, więc 2mm to żadna różnica
+- jak coś to jest nowa mapa (stara + dopisek _offset)
+
+
+
+roslaunch rcprg_gazebo_utils gazebo_client.launch
+
+
+0,673216
+-0,606522
+1,074304
+
+
+Komentarz:
+Plik do odpalenia: project_open.py
+
+Opis od momentu jak chwytak trzyma uchwyt.
+
+Za układ odniesienia przyjmuję początkowy układ wskazujący pozycję uchwytu.
+Wykonuję mały ruch i na jego podstawie wyliczam promień szafki.
+Na podstawie promienia układam równanie okręgu i wyliczam kolejne pozycje zadane - bo uchwyt będzie poruszał się po łuku okręgu.
+Na koniec jest powrót do konfiguracji początkowej.
+
+
+Wszędzie używam funkcji move_wrt_frame()
+
+Przykład: cart.move_wrt_frame(interface.velma.getTf("B", "right_handle"), 0.35, 0.2, 0.15, 0)
+
+chodzi o to, że nadgarstek ma się przemieścić do pozycji x =0.35 y = 0.2 z = 0.15 angle = 0, która jest wyrażona w układzie interface.velma.getTf("B", "right_handle") - w ten sposób najłatwiej było mi to robić widząc oba układy w RViz
+
+Zostało skleić to z początkiem - mam dziwny problem, że nawet po usunięciu tych przerzuceń układów i wykonaniu jedynie ruchu do punktu, reszta nie chce działać. Jakby układy się rozjeżdzały - może jak dodamy po prostu ruch do punktu bez generowania różnych podejść to będzie lepiej
